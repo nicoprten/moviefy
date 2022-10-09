@@ -6,12 +6,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* @layer base{
-  html {
-    font-family: 'Kanit';
-  }
-} */
-
 body{
     background-color: #030303;
 }

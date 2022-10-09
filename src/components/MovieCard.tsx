@@ -30,15 +30,15 @@ export default function MovieCard({ id, title, poster_path, release_date, vote_a
                 <p className=''>{vote_average}</p>
             </div>
             <div className='flex flex-col items-center font-bold bg-gray-dark absolute w-full top-1/4 text-gray-light opacity-0 group-hover:opacity-100 duration-200'>
-                <Link className='flex justify-around gap-1 p-2 h-full border-b-2 border-b-gray hover:text-white duration-200' to='/watchlist'>
+                <Link className='flex justify-between gap-1 w-full px-4 py-2 h-full border-b-2 border-b-gray hover:text-white duration-200' to='/watchlist'>
                     <p>WATCHLIST</p>
                     <AddCircleIcon />
                 </Link>
-                <Link className='flex justify-around gap-1 p-2 h-full border-b-2 border-b-gray hover:text-white duration-200' to='/watchlist'>
+                <Link className='flex justify-between gap-1 w-full px-4 py-2 h-full border-b-2 border-b-gray hover:text-white duration-200' to='/watchlist'>
                     <p>MOVIELIST</p>
                     <AddCircleIcon />
                 </Link>
-                <Link className='flex justify-around gap-1 p-2 h-full hover:text-white duration-200' to={`/movie:${id}`}>
+                <Link className='flex justify-between gap-1 w-full px-4 py-2 h-full hover:text-white duration-200' to={`/movie:${id}`}>
                     <p>DETAIL</p>
                     <InfoIcon />
                 </Link>
