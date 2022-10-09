@@ -2,19 +2,25 @@
 module.exports = {
   content: ["./src/**/*.{html,tsx,js}"],
   theme: {
-    extend: {},
+    extend: {
+      width: {
+        '100vw': '100vw',
+        '80vw': '80vw'
+      },
+      fontFamily: {
+        kanit: ['Kanit', 'Roboto'],
+        rubik: ['Rubik']
+      },
+      display: ["group-hover"],
+    },
     colors: {
       'white': '#FFFFFF',
       'black': '#030303',
       'gray-dark': '#141414',
-      'gray': '#8492a6',
-      'gray-light': '#d3dce6',
+      'gray': '#292929',
+      'gray-light': '#666666',
+      'blue-dark': '#123540',
       'blue': '#3092B0'
-    },
-    width: {
-      'full': '100%',
-      'screen': '80vw',
-      'cuarto': '25%',
     }
   },
   plugins: [],
