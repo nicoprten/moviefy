@@ -2,7 +2,7 @@ import React from 'react';
 import {Routes, Route} from 'react-router-dom';
 
 // COMPONENTS
-import { LastMovies } from './components/LastMovies';
+import { Home } from './components/Home';
 import { LogIn } from './components/LogIn';
 import { NavBar } from './components/NavBar';
 
@@ -14,7 +14,7 @@ export default function App(){
         <div className='w-100vw font-kanit'>
             <NavBar />
             <Routes>
-                <Route path={'/'} element={<LastMovies />} />
+                <Route path={'/'} element={<Home />} />
                 <Route path={'/login'} element={<LogIn />} />
             </Routes>
         </div>

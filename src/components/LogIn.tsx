@@ -1,15 +1,64 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+
+import { Amplify, API, Auth } from 'aws-amplify';
+import awsExports from '../aws-exports';
+Amplify.configure(awsExports);
+
+// import { logIn } from './../actions/index';
+// import { useDispatch } from 'react-redux';
+// import { Dispatch } from 'redux';
 
 export const LogIn = () => {
+
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [user, setUser] = useState<object>({});
+
+    // const dispatch = useDispatch<Dispatch<LogIn>>();
+
+
+    // const handleSetEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     setEmail(e.target.value)
+    // }
+    // const handleSetPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     setPassword(e.target.value)
+    // }
+
+    // async function handleLogIn(){
+    //     try{
+    //         const user = await Auth.signIn(email, password);
+    //         setUser(user);
+    //     }catch(err){
+    //         console.log('Error logueando ', err);
+    //     }
+    // }
+    
+
+    // async function handleLogOut(){
+    //     try{
+    //         await Auth.signOut();
+    //         setUser({});
+    //     }catch(err){
+    //         console.log('Error deslogueando ', err);
+    //     }
+    // }
+
+    // useEffect(() => {
+    //     Auth.currentAuthenticatedUser()
+    //     .then(r => setUser(r));
+    //     console.log(user)
+    // }, [])
+
     return(
         <div className='flex bg-gray-dark text-white w-80vw mx-auto p-4 mt-8 rounded-sm'>
             <div className='w-6/12'>
                 <h2 className='font-bold text-xl my-2'>Log In</h2>
+                {Object.keys(user).length > 0 ? <p onClick={() => console.log('log out')}>log out</p> : <p>logueate pa</p>}
                 <form className='flex flex-col w-6/12'>
                     <p className='text-gray-light'>Email or username</p>
-                    <input className='bg-gray-dark rounded-sm my-2 border-b-2 border-gray focus:outline-none' type='text' name='email' />
+                    <input className='bg-gray-dark rounded-sm my-2 border-b-2 border-gray focus:outline-none' type='text' name='email' value={email} placeholder='email'/>
                     <p className='text-gray-light'>Password</p>
-                    <input className='bg-gray-dark rounded-sm my-2 border-b-2 border-gray focus:outline-none' type='password' name='password' />
+                    <input className='bg-gray-dark rounded-sm my-2 border-b-2 border-gray focus:outline-none' type='password' name='password' value={password} placeholder='password'/>
                 </form>
                 <div className='flex flex-col w-6/12 items-center'>
                     <button className='w-full bg-gray-black text-blue font-bold rounded-sm my-2 border-2 border-blue hover:bg-blue hover:text-gray hover:border-blue duration-200'>
@@ -37,3 +86,11 @@ export const LogIn = () => {
         </div>
     )
 }
+
+// const mapStateToProps = (state: any) => {
+//     return {
+//         userRedux: state.user
+//     }
+// }
+
+// export default connect(mapStateToProps, { logIn })(LogIn);

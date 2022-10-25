@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
+import { Auth } from 'aws-amplify';
+
 // COMPONENTS
 import MovieCard from './MovieCard';
 
@@ -26,8 +28,12 @@ export const LastMovies = () => {
     const sliderRef = useRef<HTMLDivElement>(null);
 
     const date = new Date();
-    let releaseDateNow = `${date.getFullYear()}-${parseDate(date.getMonth() + 1)}-${parseDate(date.getDate())}`;
-    let releaseDateWeek = `${date.getFullYear()}-${parseDate(date.getMonth() + 1)}-${parseDate(date.getDate() + 7)}`;
+    console.log(parseDate(date.getDate()))
+    let day = (date.getDate() + 7) > 30 ? (date.getDate() + 7) % 30 : date.getDate() + 7;
+    console.log(day);
+    let month = (date.getDate() + 7) > 30 ? date.getMonth() + 1 : date.getMonth();
+    let releaseDateNow = `${date.getFullYear()}-${parseDate(month + 1)}-${parseDate(day)}`;
+    let releaseDateWeek = `${date.getFullYear()}-${parseDate(month + 1)}-${parseDate(day + 7)}`;
 
     // Example: 8 => return 08
     function parseDate(date: number) {

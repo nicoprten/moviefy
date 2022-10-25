@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "storage": {
+      "MovieFy": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    },
+    "auth": {
+      "moviefy4322a04f": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "tableName",
+      "environmentVariableName": "TABLE_NAME"
+    }
+  ]
+}

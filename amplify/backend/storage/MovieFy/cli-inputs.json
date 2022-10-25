@@ -1,0 +1,22 @@
+{
+  "resourceName": "MovieFy",
+  "tableName": "Movielists",
+  "partitionKey": {
+    "fieldName": "id",
+    "fieldType": "string"
+  },
+  "sortKey": {
+    "fieldName": "userId",
+    "fieldType": "string"
+  },
+  "gsi": [
+    {
+      "name": "ByUserMovieListIndex",
+      "partitionKey": {
+        "fieldName": "userId",
+        "fieldType": "string"
+      }
+    }
+  ],
+  "triggerFunctions": []
+}
