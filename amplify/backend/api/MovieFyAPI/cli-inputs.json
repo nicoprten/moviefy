@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "paths": {
+    "/movieList": {
+      "name": "/movieList",
+      "lambdaFunction": "CreateMovieList",
+      "permissions": {
+        "setting": "private",
+        "auth": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ]
+      }
+    },
+    "/movie": {
+      "name": "/movie",
+      "lambdaFunction": "movies",
+      "permissions": {
+        "setting": "private",
+        "auth": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ]
+      }
+    },
+    "/movieList/delete": {
+      "name": "/movieList/delete",
+      "lambdaFunction": "CreateMovieList",
+      "permissions": {
+        "setting": "private",
+        "auth": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ]
+      }
+    }
+  }
+}

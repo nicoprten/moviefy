@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "storage": {
+      "MovieListsDB": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    },
+    "auth": {
+      "moviefy4322a04f": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

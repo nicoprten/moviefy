@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "MovieFyGqlAPI",
+    "serviceName": "AppSync",
+    "gqlSchemaPath": "C:\\Users\\Felipe\\Documents\\Mariano\\Apps\\MovieFy\\moviefy\\amplify\\backend\\api\\MovieFyGqlAPI\\schema.graphql",
+    "defaultAuthType": {
+      "mode": "AMAZON_COGNITO_USER_POOLS",
+      "cognitoUserPoolId": "authmoviefy4322a04f"
+    },
+    "additionalAuthTypes": [
+      {
+        "mode": "API_KEY",
+        "expirationTime": 7,
+        "apiKeyExpirationDate": "2022-11-02T15:22:20.406Z",
+        "keyDescription": "moviefyapikey"
+      }
+    ]
+  }
+}
