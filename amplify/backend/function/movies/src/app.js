@@ -11,9 +11,6 @@ See the License for the specific language governing permissions and limitations 
 	AUTH_MOVIEFY4322A04F_USERPOOLID
 	ENV
 	REGION
-	STORAGE_MOVIEFY_ARN
-	STORAGE_MOVIEFY_NAME
-	STORAGE_MOVIEFY_STREAMARN
 	STORAGE_MOVIELISTSDB_ARN
 	STORAGE_MOVIELISTSDB_NAME
 	STORAGE_MOVIELISTSDB_STREAMARN
@@ -37,90 +34,55 @@ app.use(function(req, res, next) {
   next()
 });
 
-function id () {
-  return Math.random().toString(36).substring(2) + Date.now().toString(36);
-}
-
-const getItems = async () => {
-  try{
-    const params = {
-      TableName: process.env.STORAGE_MOVIEFY_NAME
-    }
-    const items = await docClient.scan(params).promise();
-    return items;
-
-  } catch(e){
-
-    return e;
-
-  }
-
-}
-
-// CREATE MOVIELIST
-app.post('/movieList', function(req, res) {
-  // Add your code here
-  var params = {
-    TableName: process.env.STORAGE_MOVIELISTSDB_NAME,
-    Item: {
-      id: id(),
-      name: req.body.name,
-      user_id: req.body.userId,
-      movies: [],
-      followers: []
-    }
-  }
-
-  docClient.put(params, function (err, data) {
-    if (err) {
-      res.json({err});
-    }else res.json({success: 'Movielist Created'})
-  })
-});
-
-// GET ALL MOVIELISTS FROM ONE PARTICULAR USER
-app.get('/movieList', function (req, res) {
-  const {userIdent} = req.query;
+//ADD A MOVIE TO MOVIELIST
+app.put('/movie', (req,res) => {
+  const {movieListId, userId, newMovie} = req.body;
   const params = {
     TableName: process.env.STORAGE_MOVIELISTSDB_NAME,
-    // IndexName: 'ByUserMovieListIndex',
-    KeyConditionExpression: 'user_id = :userId',
+    IndexName: 'ByMovieListId',
+    Key: {
+        'id' : movieListId,
+        'user_id' : userId
+      },
+    UpdateExpression: `SET movies = list_append(movies, :newMovie)`,
     ExpressionAttributeValues: {
-      ':userId' : userIdent
+      ':newMovie' : newMovie
     }
   }
-  // const response = getItems();
-  // res.json({response});
-  docClient.query(params, (err, data) => {
+
+  docClient.update(params, (err, data) => {
     if (err) {
-      res.json({err});
+      res.json({msg:'UPDATE ERROR',err});
     }else {
-      res.json({data});
+      res.json({msg: 'UPDATE SUCCESS',data});
     }
-  })
+  });
 });
 
-// DELETE ONE MOVIELIST
-app.post('/movieList/delete', (req,res) => {
-  const {movieListId, userId} = req.body;
+//DELETE A MOVIE OF MOVIELIST
+app.post('/movie', (req, res) => {
+  const {itemIndex} = req.body
 
   const params = {
-    TableName : process.env.STORAGE_MOVIELISTSDB_NAME,
-    Key : {
-      'user_id' : userId,
-      'id' : movieListId
-    }
+    TableName: process.env.STORAGE_MOVIELISTSDB_NAME,
+    IndexName: 'ByMovieListId',
+    Key: {
+        'id' : '4rg5mi3pqsol9nklrys',
+        'user_id' : '7036d9d5-6a84-4a97-bb1f-f432297c01d4'
+      },
+    UpdateExpression: `REMOVE movies[${itemIndex}]`,
   };
 
-  docClient.delete(params, (err, data) => {
-    if (err){
-     res.json({msg:'ERROR DELETING MOVIELIST', err});
+  docClient.update(params, (err, data) => {
+    if (err) {
+      res.json({msg:'DELETE ERROR',err});
+    }else {
+      res.json({msg: 'DELETE SUCCESS',data});
     }
-    else {
-      res.json({msg:'SUCCESS DELETING MOVIELIST', data});
-    }
-  })
-})
+  });
+
+
+});
 
 app.listen(3000, function() {
     console.log("App started")

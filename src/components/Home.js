@@ -7,6 +7,7 @@ export const Home = () => {
         <div className='text-white'>
             <h1 className='text-white'>Home</h1>
             <p>descripcion de toda la web!</p>
+            
             <LastMovies />
         </div>
     )

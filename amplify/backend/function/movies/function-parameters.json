@@ -1,12 +1,6 @@
 {
   "permissions": {
     "storage": {
-      "MovieFy": [
-        "create",
-        "read",
-        "update",
-        "delete"
-      ],
       "MovieListsDB": [
         "create",
         "read",
@@ -23,11 +17,5 @@
       ]
     }
   },
-  "lambdaLayers": [],
-  "environmentVariableList": [
-    {
-      "cloudFormationParameterName": "tableName",
-      "environmentVariableName": "TABLE_NAME"
-    }
-  ]
+  "lambdaLayers": []
 }

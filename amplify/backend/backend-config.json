@@ -3,6 +3,15 @@
     "MovieFy": {
       "service": "DynamoDB",
       "providerPlugin": "awscloudformation"
+    },
+    "MovieListsDB": {
+      "service": "DynamoDB",
+      "providerPlugin": "awscloudformation"
+    },
+    "AvatarsImages": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": []
     }
   },
   "auth": {
@@ -49,6 +58,38 @@
           ]
         },
         {
+          "category": "storage",
+          "resourceName": "MovieListsDB",
+          "attributes": [
+            "Name",
+            "Arn",
+            "StreamArn"
+          ]
+        },
+        {
+          "category": "auth",
+          "resourceName": "moviefy4322a04f",
+          "attributes": [
+            "UserPoolId"
+          ]
+        }
+      ]
+    },
+    "movies": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "storage",
+          "resourceName": "MovieListsDB",
+          "attributes": [
+            "Name",
+            "Arn",
+            "StreamArn"
+          ]
+        },
+        {
           "category": "auth",
           "resourceName": "moviefy4322a04f",
           "attributes": [
@@ -70,8 +111,49 @@
             "Name",
             "Arn"
           ]
+        },
+        {
+          "category": "function",
+          "resourceName": "movies",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
         }
       ]
+    },
+    "MovieFyGqlAPI": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "moviefy4322a04f",
+          "attributes": [
+            "UserPoolId"
+          ]
+        }
+      ],
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authmoviefy4322a04f"
+            }
+          },
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "API_KEY",
+              "apiKeyConfig": {
+                "apiKeyExpirationDays": 7,
+                "apiKeyExpirationDate": "2022-11-02T15:22:20.406Z",
+                "description": "moviefyapikey"
+              }
+            }
+          ]
+        }
+      }
     }
   }
 }

@@ -16,22 +16,6 @@
     "s3Key": {
       "Type": "String"
     },
-    "storageMovieFyName": {
-      "Type": "String",
-      "Default": "storageMovieFyName"
-    },
-    "storageMovieFyArn": {
-      "Type": "String",
-      "Default": "storageMovieFyArn"
-    },
-    "storageMovieFyStreamArn": {
-      "Type": "String",
-      "Default": "storageMovieFyStreamArn"
-    },
-    "authmoviefy4322a04fUserPoolId": {
-      "Type": "String",
-      "Default": "authmoviefy4322a04fUserPoolId"
-    },
     "storageMovieListsDBName": {
       "Type": "String",
       "Default": "storageMovieListsDBName"
@@ -44,8 +28,9 @@
       "Type": "String",
       "Default": "storageMovieListsDBStreamArn"
     },
-    "tableName": {
-      "Type": "String"
+    "authmoviefy4322a04fUserPoolId": {
+      "Type": "String",
+      "Default": "authmoviefy4322a04fUserPoolId"
     }
   },
   "Conditions": {
@@ -78,12 +63,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "CreateMovieList",
+            "movies",
             {
               "Fn::Join": [
                 "",
                 [
-                  "CreateMovieList",
+                  "movies",
                   "-",
                   {
                     "Ref": "env"
@@ -101,18 +86,6 @@
             "REGION": {
               "Ref": "AWS::Region"
             },
-            "STORAGE_MOVIEFY_NAME": {
-              "Ref": "storageMovieFyName"
-            },
-            "STORAGE_MOVIEFY_ARN": {
-              "Ref": "storageMovieFyArn"
-            },
-            "STORAGE_MOVIEFY_STREAMARN": {
-              "Ref": "storageMovieFyStreamArn"
-            },
-            "AUTH_MOVIEFY4322A04F_USERPOOLID": {
-              "Ref": "authmoviefy4322a04fUserPoolId"
-            },
             "STORAGE_MOVIELISTSDB_NAME": {
               "Ref": "storageMovieListsDBName"
             },
@@ -122,8 +95,8 @@
             "STORAGE_MOVIELISTSDB_STREAMARN": {
               "Ref": "storageMovieListsDBStreamArn"
             },
-            "TABLE_NAME": {
-              "Ref": "tableName"
+            "AUTH_MOVIEFY4322A04F_USERPOOLID": {
+              "Ref": "authmoviefy4322a04fUserPoolId"
             }
           }
         },
@@ -144,12 +117,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "moviefyLambdaRole4d57ecc5",
+            "moviefyLambdaRolead91b2e8",
             {
               "Fn::Join": [
                 "",
                 [
-                  "moviefyLambdaRole4d57ecc5",
+                  "moviefyLambdaRolead91b2e8",
                   "-",
                   {
                     "Ref": "env"
@@ -235,39 +208,6 @@
         "PolicyDocument": {
           "Version": "2012-10-17",
           "Statement": [
-            {
-              "Effect": "Allow",
-              "Action": [
-                "dynamodb:Put*",
-                "dynamodb:Create*",
-                "dynamodb:BatchWriteItem",
-                "dynamodb:Get*",
-                "dynamodb:BatchGetItem",
-                "dynamodb:List*",
-                "dynamodb:Describe*",
-                "dynamodb:Scan",
-                "dynamodb:Query",
-                "dynamodb:Update*",
-                "dynamodb:RestoreTable*",
-                "dynamodb:Delete*"
-              ],
-              "Resource": [
-                {
-                  "Ref": "storageMovieFyArn"
-                },
-                {
-                  "Fn::Join": [
-                    "/",
-                    [
-                      {
-                        "Ref": "storageMovieFyArn"
-                      },
-                      "index/*"
-                    ]
-                  ]
-                }
-              ]
-            },
             {
               "Effect": "Allow",
               "Action": [
